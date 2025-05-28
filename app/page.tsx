@@ -1,8 +1,12 @@
+import { auth } from "@/auth";
 import CustomLink from "@/components/custom-link";
 
 export default async function Home() {
+
+  const session = await auth();
+
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 max-w-3xl flex-auto mx-auto sm:px-6 px-4">
       <h1 className="text-3xl font-bold">🚀NextAuth.js Tutorial</h1>
       <div>
         <CustomLink href="/server-example" className="underline">
@@ -18,7 +22,9 @@ export default async function Home() {
         <div className="p-4 font-bold rounded-t-md bg-neutral-200">
           Current Session
         </div>
-        <pre className="py-6 px-4 whitespace-pre-wrap break-all"></pre>
+        <pre className="py-6 px-4 whitespace-pre-wrap break-all">
+          {JSON.stringify(session, null, 2 )}
+        </pre>
       </div>
     </div>
   );
